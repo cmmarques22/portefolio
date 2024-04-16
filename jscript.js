@@ -51,7 +51,7 @@ function followGitLink() {
 }
 
 function followPPLink() {
-  window.location.href = "https://github.com/cmmarques22";
+  window.location.href = "https://cmmarques22.github.io/portefolio/";
 }
 
 const apitest = "fc964s97f5fdc6sc4ae260sbee0sde1sfs62a";
