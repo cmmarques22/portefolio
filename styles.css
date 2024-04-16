@@ -1,52 +1,286 @@
-/* Resetting default margin and padding */
-body, h1, h2, p, ul, li {
-    margin: 0;
-    padding: 0;
-}
-
-/* Basic styling */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f0f0f0;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+/* Header */
+.nav {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: flex-end;
+}
+.nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px;
+}
+.nav a:hover,
+.nav a:focus {
+  border-bottom: 4px solid #333;
 }
 
-nav ul {
-    list-style-type: none;
-    background-color: #444;
-    overflow: hidden;
+/* Introduction */
+#userPhoto {
+  width: 250px;
+  height: 220px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+#greeting-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 600px;
+  background-color: #f0f0f0;
 }
 
-nav ul li {
-    float: left;
+#scrollButton {
+  margin-top: 120px;
+  padding: 20px;
+  border: 2px solid #333;
+  border-radius: 60px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s;
 }
 
-nav ul li a {
-    display: block;
-    color: #fff;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+#scrollButton:hover {
+  background-color: #333;
+  color: #fff;
 }
 
-nav ul li a:hover {
-    background-color: #555;
+/* Arrow */
+.arrow-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.arrow {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #333;
 }
 
-section {
-    padding: 20px;
+/* About Me */
+#about-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#about-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+#about-content h2 {
+  margin-bottom: 20px;
+}
+
+#description-text {
+  max-width: 600px;
+  text-align: center;
+  padding: 5%;
+  width: 1300px;
+  margin-left: auto;
+  margin-right: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 600px;
+}
+
+/* Image Grid */
+.skills {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 1%;
+}
+
+.skills-column {
+  width: 125px;
+  row-gap: 25px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.skills-item {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 20px;
+  border: 3px solid #333;
+}
+.skills-item:hover {
+  border: 3px solid #ffffff;
+  background-color: #333;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.skills-item img {
+  height: 60px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 30px;
+}
+.skills-name {
+  font-size: 12px;
+}
+.skills-name:hover {
+  color: #ffffff;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+/* CV and GitHub Buttons */
+#cvgitbuttons {
+  margin-top: 10px;
+}
+#downloadCVButton,
+#githubButton,
+#ppButton {
+  margin-top: 100px;
+  padding: 30px;
+  margin-right: 30px;
+  margin-left: 30px;
+  border: 2px solid #333;
+  border-radius: 60px;
+  background-color: transparent;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+#downloadCVButton:hover,
+#githubButton:hover,
+#ppButton:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Contact Form */
+#contact {
+  padding: 50px;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+}
+
+.centered-text {
+  text-align: center;
+  color: #333;
+}
+
+#contact-container {
+  display: flex;
+  padding: 150px;
+  justify-content: center;
+  align-items: center;
+}
+
+#buttonContainer {
+  text-align: center;
+}
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  margin-top: 20px;
+}
+
+input,
+textarea {
+  padding: 10px;
+  margin: 5px 0;
+  color: #ffffff;
+  border-radius: 10px;
+  background-color: #333;
+  border: none;
+}
+
+#submit-button {
+  margin-top: 20px;
+  padding: 10px;
+  border: 2px solid #333;
+  background-color: transparent;
+  border-radius: 60px;
+  justify-content: center;
+  color: #333;
+  cursor: pointer;
+  text-align: center;
+  width: 125px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#submit-button:hover {
+  background-color: #333;
+  color: #fff;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+  text-align: center;
+}
+
+/* Media Queries for responsiveness */
+
+@media screen and (max-width: 768px) {
+  #userPhoto {
+    width: 250px;
+    height: 220px;
+    max-width: none;
+    margin-right: 0;
+  }
+  #greeting-container {
+    height: 600px;
+  }
+  #scrollButton {
+    margin-top: 20px;
+    padding: 15px;
+  }
+  .arrow-container {
+    margin-top: 10px;
+  }
+  #about-content {
+    flex-direction: column;
     text-align: center;
-    padding: 10px 0;
+  }
+  #description-text {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .skills {
+    flex-direction: column;
+    align-items: center;
+  }
+  .skills-column {
+    width: 100%;
+  }
+  #downloadCVButton,
+  #githubButton {
+    margin-top: 20px;
+    padding: 15px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  #contact-container {
+    padding: 50px;
+  }
+  #contact-form {
+    width: 100%;
+    max-width: none;
+    margin-top: 20px;
+  }
+  #submit-button {
+    width: 100%;
+  }
 }
