@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portefolio Bio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="jscript.js" defer></script>
+    
+    </style>
+  </head>
+  <h2 class="centered-text">Power BI</h2>
+
+  <div id="greeting-container">
+    <div class="image-container">
+      <img src="./images/powerbi1.png" alt="User Photo" />
+    </div>
+    <div class="image-container">
+      <img src="./images/powerbi3.png" alt="PowerBI1 ">
+    </div>
+    <div class="image-container">
+      <img src="./images/powerbi4.png" alt="PowerBI2">
+    </div>
+  </div>
+  
+  
+
+    <!-- <header class="nav">
+      <nav>
+        <a href="#home" onclick="showHome()">Home</a>
+        <a href="#about" onclick="showAbout()">About</a>
+        <a href="#contact" onclick="showContact()">Contact</a>
+      </nav>
+    </header> -->
+
+    <div id="about-container">
+      <div>
+        <h2 class="centered-text">Power Apps</h2>
+        <!-- container2 -->
+        <div id="about-content">
+          <!-- container 3.1 -->
+          <div id="description-text">
+            <p class="centered-text" style="font-size: 20px">
+              A curious person looking for an opportunity to follow my passion:
+              breaking into the world of technology and programming. With a
+              critical and open mind, I am always looking to explore new ideas.
+            </p>
+          <iframe title="rankingtest" width="500" height="800" src="https://app.powerbi.com/view?r=eyJrIjoiNzRkMzcwMWMtYmNjNS00ZWJiLTgwMjItYzlmZDc4MjBmMDVmIiwidCI6IjkyNzQyZWFlLWExMTktNDNmYi1hOTU2LWQ3ZGVmNzQ0ODgxYSIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+
+          </div>
+          <!-- container3.2 -->
+
+
+        </div>
+      </div>
+    </div>
+    <div>
+      <div id="buttonContainer">
+        <button id="downloadCVButton" onclick="downloadFile()">
+          Download My CV
+        </button>
+        <button id="githubButton" onclick="followLink()">
+          Visit my GitHub
+        </button>
+      </div>
+    </div>
+
+    <div class="container centered-text" id="contact-container">
+      <div id="contact">
+        <h2>Contact</h2>
+        <p class="centered-text" style="font-size: 20px">
+          Have a question? Feel free to to leave your details and i'll get back
+          to you.
+        </p>
+        <div id="contact-form">
+          <input
+            name="subject"
+            id="subject"
+            type="text"
+            placeholder="Subject"
+          />
+          <input name="email" id="email" type="email" placeholder="Email" />
+
+          <textarea
+            id="message"
+            name="message"
+            type="message"
+            placeholder="Message"
+          ></textarea>
+        </div>
+        <div>
+          <button name="button" id="submit-button" onclick="submitForm()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="centered-text">Sunset Time Search</h1>
+
+    <div class="centered-text">
+      <label for="city">Cidade:</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        placeholder="Insira nome de uma Cidade"
+      />
+      <button type="submit" id="submit-btn">Obter horas</button>
+    </div>
+
+    <div id="weather-info">
+      <p class="centered-text" id="sunsetTime"></p>
+    </div>
+
+    <footer>
+      <div class="centered-text">
+        <div>
+          <a href="https://github.com/cmmarques22">
+            <div>
+              <img src="./images/git.png" alt="github" width="50px" height="50px" />
+            </div>
+          </a>
+        </div>
+        <div>
+          <a href="mailto:carlos.marques22@live.com.com">
+            <div>
+              <img src="./images/mail.png" alt="email" width="50px" height="50px" />
+            </div>
+          </a>
+        </div>
+        <div>
+          <a href="https://www.linkedin.com/in/carlos--marques/">
+            <div>
+              <img src="./images/in.png" alt="linkedin" width="50px" height="50px" />
+            </div>
+          </a>
+        </div>
+        
+      <p>Carlos Marques 2024</p>
+    </footer>
+
+  </body>
+</html>
