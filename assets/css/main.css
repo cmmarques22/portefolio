@@ -1821,7 +1821,7 @@ input, select, textarea {
 
 /* Hover effect */
 .image:hover {
-    transform: scale(1.45); /* Increase size on hover */
+    transform: scale(1.30); /* Increase size on hover */
 	}
 
 .image:hover img {
