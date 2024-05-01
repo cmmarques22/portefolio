@@ -1,0 +1,1300 @@
+kind: BotDefinition
+environmentId: 3299dea6-dd67-e129-9ec5-34091a189e40
+entity:
+  schemaName: cr463_copilot1Test
+  cdsBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+  accessControlPolicy: ChatbotReaders
+  authenticationMode: Integrated
+  authenticationTrigger: Always
+  configuration: {}
+  language: 1033
+
+components:
+  - kind: DialogComponent
+    version: 3610178
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:33.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:33.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Reset Conversation
+    id: 0c7c0440-d514-4b12-aded-92df4dfae829
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.ResetConversation
+    dialog:
+      startBehavior: UseLatestPublishedContentAndCancelOtherTopics
+      beginDialog:
+        kind: OnSystemRedirect
+        id: main
+        actions:
+          - kind: SendActivity
+            id: sendMessage_OPsT1O
+            activity: What can I help you with?
+
+          - kind: ClearAllVariables
+            id: clearAllVariables_73bTFR
+            variables: ConversationScopedVariables
+
+          - kind: CancelAllDialogs
+            id: cancelAllDialogs_12Gt21
+
+  - kind: DialogComponent
+    version: 3610201
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:34.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:34.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Sign in 
+    id: 1427e289-b87b-4a10-9c2c-a92d7ecb203a
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: This system topic triggers when the bot needs to sign in the user or require the user to sign in
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.Signin
+    dialog:
+      beginDialog:
+        kind: OnSignIn
+        id: main
+        actions:
+          - kind: ConditionGroup
+            id: conditionGroup_ypjGKL
+            conditions:
+              - id: conditionItem_7XYIIR
+                condition: =System.SignInReason = SignInReason.SignInRequired
+                actions:
+                  - kind: SendActivity
+                    id: sendMessage_1jHUNO
+                    activity: Hello! To be able to help you, I'll need you to sign in.
+
+          - kind: OAuthInput
+            id: gOjhZA
+            title: Login
+            text: To continue, please login
+
+  - kind: DialogComponent
+    version: 3610159
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:33.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:33.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Lesson 2 - A simple topic with a condition and variable
+    id: 257e51dc-f506-4310-94e6-b1c8dba346ee
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.Lesson2
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Lesson 2 - A simple topic with a condition and variable
+          triggerQueries:
+            - Find my nearest store
+            - Check store location
+            - Find a store
+            - Find me your nearest location
+            - Store near me
+
+        actions:
+          - kind: SendActivity
+            id: qvduia
+            activity: I'd be glad to help find a store near you.
+
+          - kind: Question
+            id: LbWwpD
+            alwaysPrompt: true
+            variable: init:Topic.StoreLocation
+            prompt: Which location are you interested in?
+            entity:
+              kind: EmbeddedEntity
+              definition:
+                kind: ClosedListEntity
+                smartMatchingEnabled: true
+                items:
+                  - id: Redmond
+                    displayName: Redmond
+
+                  - id: Seattle
+                    displayName: Seattle
+
+                  - id: Kirkland
+                    displayName: Kirkland
+
+          - kind: ConditionGroup
+            id: HE6JRU
+            conditions:
+              - id: 6G9Hhn
+                condition: =Topic.StoreLocation = 'cr463_copilot1Test.topic.Lesson2.main.LbWwpD'.'Redmond'
+                actions:
+                  - kind: SendActivity
+                    id: khIIPE
+                    activity: "Check out the Company Store at our Visitor Center. The address is: 4567 Main St., Redmond, 26132."
+
+              - id: dqf7pu
+                condition: =Topic.StoreLocation = 'cr463_copilot1Test.topic.Lesson2.main.LbWwpD'.'Seattle'
+                actions:
+                  - kind: SendActivity
+                    id: X7eulp
+                    activity: "Our {Topic.StoreLocation} store is located in the U District in the University Village. The address is: 1234 E. University Village St., Seattle, 34567."
+
+              - id: 1QMrFE
+                condition: =Topic.StoreLocation = 'cr463_copilot1Test.topic.Lesson2.main.LbWwpD'.'Kirkland'
+                actions:
+                  - kind: SendActivity
+                    id: jtQo0O
+                    activity: "Our {Topic.StoreLocation} is located in downtown Kirkland. The address is: 1234 Central Way, Kirkland, 98321."
+
+          - kind: BeginDialog
+            id: mJXqqY
+            dialog: cr463_copilot1Test.topic.EndofConversation
+
+  - kind: DialogComponent
+    version: 3610140
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:33.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:33.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Thank you
+    id: 2c9035b2-6977-4184-be25-54d970f45b29
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: This topic triggers when the user says thank you.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.ThankYou
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Thank you
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - thanks
+            - thank you
+            - thanks so much
+            - ty
+
+        actions:
+          - kind: SendActivity
+            id: sendMessage_9iz6v7
+            activity: You're welcome.
+
+  - kind: DialogComponent
+    version: 3610154
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:33.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:33.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Fallback
+    id: 2d5de2d7-2902-4993-a45d-c72d7fc0bbe0
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: This system topic triggers when the user's utterance does not match any existing topics.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.Fallback
+    dialog:
+      beginDialog:
+        kind: OnUnknownIntent
+        id: main
+        actions:
+          - kind: ConditionGroup
+            id: conditionGroup_LktzXw
+            conditions:
+              - id: conditionItem_tlGIVo
+                condition: =System.FallbackCount < 3
+                actions:
+                  - kind: SendActivity
+                    id: sendMessage_QZreqo
+                    activity: I'm sorry, I'm not sure how to help with that. Can you try rephrasing?
+
+            elseActions:
+              - kind: BeginDialog
+                id: 5aXj5M
+                dialog: cr463_copilot1Test.topic.Escalate
+
+  - kind: DialogComponent
+    version: 3610145
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:33.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:33.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: On Error
+    id: 2f600c75-cd7b-44b1-9a74-0240c3054ee7
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: This system topic triggers when the bot encounters an error. When using the test chat pane, the full error description is displayed.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.OnError
+    dialog:
+      beginDialog:
+        kind: OnError
+        id: main
+        actions:
+          - kind: SetVariable
+            id: setVariable_timestamp
+            variable: init:Topic.CurrentTime
+            value: =Text(Now(), DateTimeFormat.UTC)
+
+          - kind: ConditionGroup
+            id: condition_1
+            conditions:
+              - id: bL4wmY
+                condition: =System.Conversation.InTestMode = true
+                actions:
+                  - kind: SendActivity
+                    id: sendMessage_XJBYMo
+                    activity: |-
+                      Error Message: {System.Error.Message}
+                      Error Code: {System.Error.Code}
+                      Conversation Id: {System.Conversation.Id}
+                      Time (UTC): {Topic.CurrentTime}
+
+            elseActions:
+              - kind: SendActivity
+                id: sendMessage_dZ0gaF
+                activity:
+                  text:
+                    - |-
+                      An error has occurred.
+                      Error code: {System.Error.Code}
+                      Conversation Id: {System.Conversation.Id}
+                      Time (UTC): {Topic.CurrentTime}.
+                  speak:
+                    - An error has occurred, please try again.
+
+          - kind: LogCustomTelemetryEvent
+            id: 9KwEAn
+            eventName: OnErrorLog
+            properties: "={ErrorMessage: System.Error.Message, ErrorCode: System.Error.Code, TimeUTC: Topic.CurrentTime, ConversationId: System.Conversation.Id}"
+
+          - kind: CancelAllDialogs
+            id: NW7NyY
+
+  - kind: DialogComponent
+    version: 3610191
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:34.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:34.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: End of Conversation
+    id: 486f39a1-41f0-499a-baca-a48cc1d7de51
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: |-
+      This system topic is only triggered by a redirect action,
+      and guides the user through rating their conversation with the bot.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.EndofConversation
+    dialog:
+      startBehavior: CancelOtherTopics
+      beginDialog:
+        kind: OnSystemRedirect
+        id: main
+        actions:
+          - kind: Question
+            id: 41d42054-d4cb-4e90-b922-2b16b37fe379
+            conversationOutcome: ResolvedImplied
+            alwaysPrompt: true
+            variable: init:Topic.SurveyResponse
+            prompt: Did that answer your question?
+            entity: BooleanPrebuiltEntity
+
+          - kind: ConditionGroup
+            id: condition-0
+            conditions:
+              - id: condition-0-item-0
+                condition: =Topic.SurveyResponse = true
+                actions:
+                  - kind: CSATQuestion
+                    id: csat_1
+                    conversationOutcome: ResolvedConfirmed
+
+                  - kind: SendActivity
+                    id: sendMessage_8r29O0
+                    activity: Thanks for your feedback.
+
+                  - kind: Question
+                    id: question_1
+                    alwaysPrompt: true
+                    variable: init:Topic.Continue
+                    prompt: Can I help with anything else?
+                    entity: BooleanPrebuiltEntity
+
+                  - kind: ConditionGroup
+                    id: condition-1
+                    conditions:
+                      - id: condition-1-item-0
+                        condition: =Topic.Continue = true
+                        actions:
+                          - kind: SendActivity
+                            id: sendMessage_4eOE6h
+                            activity: Go ahead. I'm listening.
+
+                    elseActions:
+                      - kind: SendActivity
+                        id: yHBz55
+                        activity: Ok, goodbye.
+
+                      - kind: EndConversation
+                        id: jh1GMT
+
+            elseActions:
+              - kind: Question
+                id: PM68ot
+                alwaysPrompt: true
+                variable: init:Topic.TryAgain
+                prompt: Sorry I wasn't able to help better. Would you like to try again?
+                entity: BooleanPrebuiltEntity
+
+              - kind: ConditionGroup
+                id: KNxYBf
+                conditions:
+                  - id: DPveFP
+                    condition: =Topic.TryAgain = false
+                    actions:
+                      - kind: BeginDialog
+                        id: cngqi4
+                        dialog: cr463_copilot1Test.topic.Escalate
+
+                elseActions:
+                  - kind: SendActivity
+                    id: GrVHEW
+                    activity: Go ahead. I'm listening.
+
+  - kind: DialogComponent
+    version: 3610196
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:34.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:34.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Conversation Start
+    id: 53cf6590-517f-4997-871b-3ceb071e046a
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: This system topic triggers when the bot receives an Activity indicating the beginning of a new conversation. If do not want the bot to initiate the conversation, disable this topic.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.ConversationStart
+    dialog:
+      beginDialog:
+        kind: OnConversationStart
+        id: main
+        actions:
+          - kind: SendActivity
+            id: sendMessage_M0LuhV
+            activity:
+              text:
+                - Hello, I'm {System.Bot.Name}, a virtual assistant. Just so you are aware, I sometimes use AI to answer your questions. If you provided a website during creation, try asking me about it! Next try giving me some more knowledge by setting up generative AI.
+              speak:
+                - Thanks for calling, how can I help?
+
+  - kind: DialogComponent
+    version: 3610150
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:33.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:33.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Lesson 3 - A topic with a condition, variables and a pre-built entity
+    id: 560d7df6-d8d5-4fdc-9eed-d364cb84efb9
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.Lesson3
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Lesson 3 - A topic with a condition, variables and a pre-built entity
+          triggerQueries:
+            - Buy items
+            - Buy online
+            - Buy product
+            - Purchase item
+            - Order product
+
+        actions:
+          - kind: SendActivity
+            id: Sjghab
+            activity: I am happy to help you place your order.
+
+          - kind: Question
+            id: eRH3BJ
+            alwaysPrompt: false
+            variable: init:Topic.State
+            prompt: To what state will you be shipping?
+            entity: StatePrebuiltEntity
+
+          - kind: ConditionGroup
+            id: sEzulE
+            conditions:
+              - id: pbR5LO
+                condition: =Topic.State = "California" || Topic.State = "Washington" || Topic.State = "Oregon"
+
+            elseActions:
+              - kind: SendActivity
+                id: X7BFUC
+                activity: There will be an additional shipping charge of $27.50.
+
+              - kind: Question
+                id: 6lyBi8
+                alwaysPrompt: false
+                variable: init:Topic.ShippingRateAccepted
+                prompt: Is that acceptable?
+                entity: BooleanPrebuiltEntity
+
+              - kind: ConditionGroup
+                id: 9BR57P
+                conditions:
+                  - id: BW47C4
+                    condition: =Topic.ShippingRateAccepted = true
+
+                elseActions:
+                  - kind: SendActivity
+                    id: LMwySU
+                    activity: Thank you and please come again.
+
+                  - kind: BeginDialog
+                    id: 26GAbP
+                    dialog: cr463_copilot1Test.topic.EndofConversation
+
+          - kind: Question
+            id: mgz1sJ
+            alwaysPrompt: true
+            variable: init:Topic.Item
+            prompt: What item are you interested in purchasing? We are focused on a few quality items.
+            entity:
+              kind: EmbeddedEntity
+              definition:
+                kind: ClosedListEntity
+                smartMatchingEnabled: true
+                items:
+                  - id: Desktop Computer
+                    displayName: Desktop Computer
+
+                  - id: Laptop Computer
+                    displayName: Laptop Computer
+
+                  - id: Gaming Computer
+                    displayName: Gaming Computer
+
+          - kind: ConditionGroup
+            id: 0qsIib
+            conditions:
+              - id: 1WP5jv
+                condition: =Topic.Item = 'cr463_copilot1Test.topic.Lesson3.main.mgz1sJ'.'Desktop Computer'
+                actions:
+                  - kind: SendActivity
+                    id: PjNoWL
+                    activity: Great choice for the desktop publisher!
+
+              - id: qI8gc3
+                condition: =Topic.Item = 'cr463_copilot1Test.topic.Lesson3.main.mgz1sJ'.'Laptop Computer'
+                actions:
+                  - kind: SendActivity
+                    id: vj6Vbx
+                    activity: Great choice for the on-the-go road warrior!
+
+              - id: d7d1mq
+                condition: =Topic.Item = 'cr463_copilot1Test.topic.Lesson3.main.mgz1sJ'.'Gaming Computer'
+                actions:
+                  - kind: SendActivity
+                    id: 25VVXi
+                    activity: Go get 'em tiger! Sudoku helps keep the mind active.
+
+          - kind: SendActivity
+            id: L3bEHg
+            activity: I am adding {Topic.Item} to your cart.
+
+          - kind: SendActivity
+            id: 529q62
+            activity: |-
+              To complete your order, please go to your cart.
+              
+              Thank you!
+
+          - kind: BeginDialog
+            id: wn9EyA
+            dialog: cr463_copilot1Test.topic.EndofConversation
+
+  - kind: DialogComponent
+    version: 3610173
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:33.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:33.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Greeting
+    id: 92cd22c5-9971-406f-a638-46a1535322c3
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: This topic is triggered when the user greets the bot.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.Greeting
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Greeting
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - Good afternoon
+            - Good morning
+            - Hello
+            - Hey
+            - Hi
+
+        actions:
+          - kind: SendActivity
+            id: sendMessage_abmysR
+            activity:
+              text:
+                - Hello, how can I help you today?
+              speak:
+                - Hello, <break strength="medium" /> how can I help?
+
+          - kind: CancelAllDialogs
+            id: cancelAllDialogs_01At22
+
+  - kind: DialogComponent
+    version: 3610182
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:34.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:34.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Lesson 1 - A simple topic
+    id: 988bba0c-ae79-40d4-a0dd-30aa6662999e
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.Lesson1
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Lesson 1 - A simple topic
+          triggerQueries:
+            - When are you closed
+            - When are you open
+            - Store hours
+            - Daily open hours
+
+        actions:
+          - kind: SendActivity
+            id: Ystyaa
+            activity: I'm happy to help with store hours.
+
+          - kind: SendActivity
+            id: 6Jn5pw
+            activity: |-
+              The Redmond hours are:
+              - Mon-Fri: 9am to 6pm
+              - Sat: 10am to 4pm
+              - Sun: Closed
+              
+              The Seattle hours are:
+              - Mon-Fri: 9am to 6pm
+              - Sat-Sun: 10am to 4pm
+
+          - kind: BeginDialog
+            id: Dj0B0N
+            dialog: cr463_copilot1Test.topic.EndofConversation
+
+  - kind: DialogComponent
+    version: 3603043
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-29T13:00:54.0000000Z
+      modifiedTimeUtc: 2024-04-29T13:00:54.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Conversational boosting
+    id: af1e4bf2-fdc7-4303-8341-33d56ddf503d
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: Create generative answers from data sources.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.Search
+    dialog:
+      beginDialog:
+        kind: OnUnknownIntent
+        id: main
+        priority: -1
+        actions:
+          - kind: SearchAndSummarizeContent
+            id: search-content
+            userInput: =System.Activity.Text
+            variable: Topic.Answer
+            publicDataSource:
+              sites:
+                - "https://en.wikipedia.org/wiki/Potato"
+
+          - kind: ConditionGroup
+            id: has-answer-conditions
+            conditions:
+              - id: has-answer
+                condition: =!IsBlank(Topic.Answer)
+                actions:
+                  - kind: EndDialog
+                    id: end-topic
+                    clearTopicQueue: true
+
+  - kind: DialogComponent
+    version: 3610168
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:33.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:33.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Multiple Topics Matched
+    id: b8db1916-01b6-465d-b7fe-550cbffff118
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: This system topic triggers when the bot matches multiple Topics with the incoming message and needs to clarify which one should be triggered.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.MultipleTopicsMatched
+    dialog:
+      beginDialog:
+        kind: OnSelectIntent
+        id: main
+        triggerBehavior: Always
+        actions:
+          - kind: SetVariable
+            id: setVariable_M6434i
+            variable: init:Topic.IntentOptions
+            value: =System.Recognizer.IntentOptions
+
+          - kind: SetTextVariable
+            id: setTextVariable_0
+            variable: Topic.NoneOfTheseDisplayName
+            value: None of these
+
+          - kind: EditTable
+            id: sendMessage_g5Ls09
+            changeType: Add
+            itemsVariable: Topic.IntentOptions
+            value: "={ DisplayName: Topic.NoneOfTheseDisplayName, TopicId: \"NoTopic\", TriggerId: \"NoTrigger\", Score: 1.0 }"
+
+          - kind: Question
+            id: question_zf2HhP
+            interruptionPolicy:
+              allowInterruption: false
+
+            alwaysPrompt: true
+            variable: System.Recognizer.SelectedIntent
+            prompt: "To clarify, did you mean:"
+            entity:
+              kind: DynamicClosedListEntity
+              items: =Topic.IntentOptions
+
+          - kind: ConditionGroup
+            id: conditionGroup_60PuXb
+            conditions:
+              - id: conditionItem_rs7GgM
+                condition: =System.Recognizer.SelectedIntent.TopicId = "NoTopic"
+                actions:
+                  - kind: ReplaceDialog
+                    id: YZXRDb
+                    dialog: cr463_copilot1Test.topic.Fallback
+
+  - kind: DialogComponent
+    version: 3610136
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:32.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:32.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Start Over
+    id: d24528f1-46b8-42ad-b33b-8819a60919c4
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.StartOver
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Start Over
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - let's begin again
+            - start over
+            - start again
+            - restart
+
+        actions:
+          - kind: Question
+            id: question_zguoVV
+            alwaysPrompt: false
+            variable: init:Topic.Confirm
+            prompt: Are you sure you want to restart the conversation?
+            entity: BooleanPrebuiltEntity
+
+          - kind: ConditionGroup
+            id: conditionGroup_lvx2zV
+            conditions:
+              - id: conditionItem_sVQtHa
+                condition: =Topic.Confirm = true
+                actions:
+                  - kind: BeginDialog
+                    id: 0YKYsy
+                    dialog: cr463_copilot1Test.topic.ResetConversation
+
+            elseActions:
+              - kind: SendActivity
+                id: sendMessage_lk2CyQ
+                activity: Ok. Let's carry on.
+
+  - kind: DialogComponent
+    version: 3610163
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:33.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:33.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Goodbye
+    id: d3b46307-8569-479f-9b0d-cf0f715393c9
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: This topic triggers when the user says goodbye. By default, it does not end the conversation. If you would like to end the conversation when the user says goodbye, you can add an "End of Conversation" action to this topic, or redirect to the "End of Conversation" system topic.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.Goodbye
+    dialog:
+      startBehavior: CancelOtherTopics
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Goodbye
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - Bye
+            - Bye for now
+            - Bye now
+            - Good bye
+            - No thank you. Goodbye.
+            - See you later
+
+        actions:
+          - kind: Question
+            id: question_zf2HhP
+            variable: Topic.EndConversation
+            prompt: Would you like to end our conversation?
+            entity: BooleanPrebuiltEntity
+
+          - kind: ConditionGroup
+            id: condition_DGc1Wy
+            conditions:
+              - id: condition_DGc1Wy-item-0
+                condition: =Topic.EndConversation = true
+                actions:
+                  - kind: BeginDialog
+                    id: dn94DC
+                    dialog: cr463_copilot1Test.topic.EndofConversation
+
+              - id: condition_DGc1Wy-item-1
+                condition: =Topic.EndConversation = false
+                actions:
+                  - kind: SendActivity
+                    id: sendMessage_LdLhmf
+                    activity: Go ahead. I'm listening.
+
+  - kind: DialogComponent
+    version: 3610186
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-30T02:12:34.0000000Z
+      modifiedTimeUtc: 2024-04-30T02:12:34.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: Escalate
+    id: d9c61a44-f04c-4238-9da5-f13fdb399236
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    description: |-
+      This system topic is triggered when the user indicates they would like to speak to a human agent.
+      You can configure how the bot will handle human hand-off scenarios in the bot settings.
+      If your bot does not handle escalations, this topic should be disabled.
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.Escalate
+    dialog:
+      startBehavior: CancelOtherTopics
+      beginDialog:
+        kind: OnEscalate
+        id: main
+        intent:
+          displayName: Escalate
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - Talk to agent
+            - Talk to a person
+            - Talk to someone
+            - Call back
+            - Call customer service
+            - Call me please
+            - Call support
+            - Call technical support
+            - Can an agent call me
+            - Can I call
+            - Can I get in touch with someone else
+            - Can I get real agent support
+            - Can I get transferred to a person to call
+            - Can I have a call in number Or can I be called
+            - Can I have a representative call me
+            - Can I schedule a call
+            - Can I speak to a representative
+            - Can I talk to a human
+            - Can I talk to a human assistant
+            - Can someone call me
+            - Chat with a human
+            - Chat with a representative
+            - Chat with agent
+            - Chat with someone please
+            - Connect me to a live agent
+            - Connect me to a person
+            - Could some one contact me by phone
+            - Customer agent
+            - Customer representative
+            - Customer service
+            - I need a manager to contact me
+            - I need customer service
+            - I need help from a person
+            - I need to speak with a live argent
+            - I need to talk to a specialist please
+            - I want to talk to customer service
+            - I want to proceed with live support
+            - I want to speak with a consultant
+            - I want to speak with a live tech
+            - I would like to speak with an associate
+            - I would like to talk to a technician
+            - Talk with tech support member
+
+        actions:
+          - kind: SendActivity
+            id: sendMessage_s39DCt
+            conversationOutcome: Escalated
+            activity: |-
+              Escalating to a live agent is not currently configured for this bot, however this is where the bot could provide information about how to get in touch with someone another way.
+              
+              Is there anything else I can help you with?
+
+  - kind: DialogComponent
+    version: 3615759
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2024-04-29T13:19:38.0000000Z
+      modifiedTimeUtc: 2024-05-01T11:47:22.0000000Z
+      createdBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+      modifiedBy: dceedb9b-f3b0-4389-940b-4a7ae9de0fe9
+
+    displayName: potatos
+    id: f0c4339b-59e3-4100-a571-9c6a7e1b91f5
+    parentBotId: 67f2efe9-0e06-ef11-9f89-000d3aa90ec8
+    shareContext: {}
+    state: Active
+    status: Active
+    schemaName: cr463_copilot1Test.topic.potatos
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          triggerQueries:
+            - potato recipes
+            - how to cook potatoes
+            - potato dishes
+            - types of potatoes
+            - potato nutrition facts
+            - best way to store potatoes
+            - potato varieties
+            - potato cooking tips
+            - potatoes
+
+        actions:
+          - kind: SendActivity
+            id: SendActivity_KgwUb4
+            activity: "Potatoes are a versatile and widely consumed vegetable. They are a good source of carbohydrates, fiber, and various vitamins and minerals. Potatoes can be prepared in many ways, such as boiling, baking, frying, or mashing. They can be used in a variety of dishes, including soups, salads, casseroles, and side dishes. Some popular potato dishes include french fries, mashed potatoes, potato salad, and baked potatoes. Potatoes come in different varieties, such as russet, red, yellow, and sweet potatoes. They can be stored in a cool, dark place for several weeks. Enjoy exploring the world of potatoes in your culinary adventures! Here is a list of potatoes:"
+
+          - kind: InvokeFlowAction
+            id: invokeFlowAction_Nn7H2c
+            input: {}
+            output:
+              binding:
+                lista: Topic.getList
+
+            flowId: cba76b32-2a06-ef11-9f89-000d3aa90ec8
+
+          - kind: SendActivity
+            id: sendActivity_ymNykw
+            activity: "{Topic.getList}"
+
+          - kind: Question
+            id: question_Zt1Zxa
+            interruptionPolicy:
+              allowInterruption: true
+
+            variable: init:Topic.userTableAction
+            prompt: Do you wish to add, remove or buy/sell potatoes?
+            entity:
+              kind: EmbeddedEntity
+              definition:
+                kind: ClosedListEntity
+                items:
+                  - id: Add
+                    displayName: Add
+
+                  - id: Remove
+                    displayName: Remove
+
+                  - id: Buy/Sell
+                    displayName: Buy/Sell
+
+          - kind: ConditionGroup
+            id: conditionGroup_LKv63N
+            conditions:
+              - id: conditionItem_zYRDpZ
+                condition: =Topic.userTableAction = 'cr463_copilot1Test.topic.potatos.main.question_Zt1Zxa'.Add
+                actions:
+                  - kind: Question
+                    id: question_ai1jwS
+                    interruptionPolicy:
+                      allowInterruption: true
+
+                    variable: init:Topic.addName
+                    prompt: What is the name of the potato?
+                    entity: StringPrebuiltEntity
+
+                  - kind: Question
+                    id: question_X5kAcn
+                    interruptionPolicy:
+                      allowInterruption: true
+
+                    variable: init:Topic.qtPotatoes
+                    prompt: How much?
+                    entity: NumberPrebuiltEntity
+
+                  - kind: Question
+                    id: question_LP5i8t
+                    interruptionPolicy:
+                      allowInterruption: true
+
+                    variable: init:Topic.valeAPena
+                    prompt: Vale a pena?
+                    entity:
+                      kind: EmbeddedEntity
+                      definition:
+                        kind: ClosedListEntity
+                        items:
+                          - id: Sim
+                            displayName: Sim
+
+                          - id: Não
+                            displayName: Não
+
+                          - id: Até vai
+                            displayName: Até vai
+
+                  - kind: SetVariable
+                    id: setVariable_uL0kw6
+                    variable: Topic.valeAPenaString_
+                    value: =Text(Topic.valeAPena)
+
+                  - kind: InvokeFlowAction
+                    id: invokeFlowAction_wb8JTv
+                    input:
+                      binding:
+                        number: =Topic.qtPotatoes
+                        text: =Topic.addName
+                        text_1: =Topic.valeAPenaString_
+
+                    output:
+                      binding:
+                        a_new potato has risen: Topic.anewpotatohasrisen
+
+                    flowId: 585fdf70-2e06-ef11-9f89-000d3aa90ec8
+
+                  - kind: SendActivity
+                    id: sendActivity_pDuTEw
+                    activity: "{Topic.anewpotatohasrisen}"
+
+              - id: conditionItem_aOQgph
+                condition: =Topic.userTableAction = 'cr463_copilot1Test.topic.potatos.main.question_Zt1Zxa'.Remove
+                actions:
+                  - kind: Question
+                    id: question_fm5fqI
+                    interruptionPolicy:
+                      allowInterruption: true
+
+                    variable: init:Topic.deleteName
+                    prompt: Insert the potato name
+                    entity: StringPrebuiltEntity
+
+                  - kind: InvokeFlowAction
+                    id: invokeFlowAction_tNBHQw
+                    input:
+                      binding:
+                        text: =Topic.deleteName
+
+                    output:
+                      binding:
+                        deleteoutput: Topic.deleteOutput
+
+                    flowId: 2c7e6270-3006-ef11-9f89-000d3aa90ec8
+
+                  - kind: SendActivity
+                    id: sendActivity_T4WbCJ
+                    activity: "{Topic.deleteOutput}"
+
+              - id: conditionItem_q3oCgv
+                condition: =Topic.userTableAction = 'cr463_copilot1Test.topic.potatos.main.question_Zt1Zxa'.'Buy/Sell'
+                actions:
+                  - kind: Question
+                    id: question_mpLfSq
+                    interruptionPolicy:
+                      allowInterruption: true
+
+                    variable: init:Topic.buySellpotatoName
+                    prompt: Insert the Potato Name
+                    entity: StringPrebuiltEntity
+
+                  - kind: Question
+                    id: question_mKHjMu
+                    interruptionPolicy:
+                      allowInterruption: true
+
+                    variable: init:Topic.buySellChoice
+                    prompt: Buy or Sell {Topic.buySellpotatoName}?
+                    entity:
+                      kind: EmbeddedEntity
+                      definition:
+                        kind: ClosedListEntity
+                        items:
+                          - id: Buy
+                            displayName: Buy
+
+                          - id: Sell
+                            displayName: Sell
+
+                  - kind: Question
+                    id: question_vXcKYr
+                    interruptionPolicy:
+                      allowInterruption: true
+
+                    variable: init:Topic.qtbatatasUser
+                    prompt: How many?
+                    entity: NumberPrebuiltEntity
+
+                  - kind: ConditionGroup
+                    id: conditionGroup_8o4sjg
+                    conditions:
+                      - id: conditionItem_JyAIEs
+                        condition: =Topic.buySellChoice = 'cr463_copilot1Test.topic.potatos.main.question_mKHjMu'.Buy
+                        actions:
+                          - kind: InvokeFlowAction
+                            id: invokeFlowAction_ecIWcP
+                            input:
+                              binding:
+                                number_1: =Topic.qtbatatasUser
+                                text_1: =Topic.buySellpotatoName
+
+                            output:
+                              binding:
+                                output: Topic.potatoOutput
+                                potatoremainging: Topic.potatoeremaining
+
+                            flowId: 96ddce48-3706-ef11-9f89-000d3aa90ec8
+
+                          - kind: SendActivity
+                            id: sendActivity_Hm0QfQ
+                            activity: You bought{Topic.qtbatatasUser}. There is now {Topic.potatoeremaining}  left.
+
+                      - id: conditionItem_QyIBaf
+                        condition: =Topic.buySellChoice = 'cr463_copilot1Test.topic.potatos.main.question_mKHjMu'.Sell
+
+flows:
+  - displayName: goWithThePotatoFlow
+    isEnabled: true
+    workflowId: cba76b32-2a06-ef11-9f89-000d3aa90ec8
+    outputType:
+      properties:
+        lista:
+          displayName: lista
+          type: String
+
+  - displayName: buyPotatoFlow
+    isEnabled: true
+    workflowId: 96ddce48-3706-ef11-9f89-000d3aa90ec8
+    inputType:
+      properties:
+        number_1:
+          displayName: qtPotato
+          isRequired: true
+          type: Number
+
+        text_1:
+          displayName: potatoName
+          isRequired: true
+          type: String
+
+    outputType:
+      properties:
+        output:
+          displayName: output
+          type: String
+
+        potatoremainging:
+          displayName: potatoRemainging
+          type: Number
+
+  - displayName: deletePotatoFlow
+    isEnabled: true
+    workflowId: 2c7e6270-3006-ef11-9f89-000d3aa90ec8
+    inputType:
+      properties:
+        text:
+          displayName: potatoname
+          isRequired: true
+          type: String
+
+    outputType:
+      properties:
+        deleteoutput:
+          displayName: deleteOutput
+          type: String
+
+  - displayName: addPotatoFlow_
+    isEnabled: true
+    workflowId: 585fdf70-2e06-ef11-9f89-000d3aa90ec8
+    inputType:
+      properties:
+        number:
+          displayName: Quantidade
+          isRequired: true
+          type: Number
+
+        text:
+          displayName: name
+          isRequired: true
+          type: String
+
+        text_1:
+          displayName: Vale a PenaText
+          isRequired: true
+          type: String
+
+    outputType:
+      properties:
+        a_new potato has risen:
+          displayName: a new potato has risen
+          type: String
